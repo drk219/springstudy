@@ -8,6 +8,8 @@ public class MainClass {
   public static void method1() {
 
     // appCtx.xml 읽기
+    // GenericXmlApplicationContext 클래스는 xml 파일에 정의된 설정 정보를 읽어와서 객체를 생성하고, 각각의 객체를 연결한 뒤에 내부적으로 보관
+    // AbstractApplicationContext 클래스는 prepareBeanFactory 메서드를 통해 다양한 초기화 작업을 진행
     AbstractApplicationContext ctx = new GenericXmlApplicationContext("com/gdu/prj01/xml01/appCtx.xml");
     
     // appCtx.xml 에 등록한 빈(bean) 가져오기
@@ -59,8 +61,8 @@ public class MainClass {
   
 
   public static void main(String[] args) {
-    //method1();
-    //method2();
+    method1();
+    method2();
     method3();
   
   }
