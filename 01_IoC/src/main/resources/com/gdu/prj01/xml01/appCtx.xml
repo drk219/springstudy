@@ -13,7 +13,7 @@
         scope="singleton" />
   
   
-  <!--    Setter
+  <!--    Setter 방법
     Computer computer1 = new Computer();
     computer1.setModel("gram");
     computer1.setPrice(200);
@@ -29,7 +29,7 @@
   </bean>
   
   
-  <!--    생성자
+  <!--    생성자 방법
     Computer computer2 = new Computer("macbook", 300, new Calculator());
   -->
   <bean class="com.gdu.prj01.xml01.Computer"

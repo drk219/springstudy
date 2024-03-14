@@ -1,4 +1,4 @@
-package com.gdu.prj01.xml01;
+package com.gdu.prj01.anno01;
 
 public class Calculator {
   
