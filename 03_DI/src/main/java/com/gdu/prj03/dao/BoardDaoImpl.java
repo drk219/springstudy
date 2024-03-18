@@ -19,10 +19,10 @@ import com.gdu.prj03.dto.BoardDto;
 public class BoardDaoImpl implements BoardDao {
   
   private List<BoardDto> boardList = Arrays.asList(
-       new BoardDto(1, "제목1", "내용1"), 
-       new BoardDto(2, "제목2", "내용2"),
-       new BoardDto(3, "제목3", "내용3") 
-      );
+      new BoardDto(1, "제목1", "내용1"), 
+      new BoardDto(2, "제목2", "내용2"),
+      new BoardDto(3, "제목3", "내용3") 
+  );
   
   @Override
   public List<BoardDto> getBoardList() {    

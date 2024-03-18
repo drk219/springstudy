@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdu.mybatis_ex.dao.student_t">
+  
+  <insert id="insertStudent"
+          parameterType="com.gdu.mybatis_ex.dto.StudentDto">
+      INSERT INTO STUDENT_T (
+          STUDENTNO
+        , NAME
+        , KOREAN
+        , ENGLISH
+        , MATH
+      ) VALUES (
+          STUDENT_SEQ.NEXTVAL
+        , #{name}
+        , #{korean}
+        , #{english}
+        , #{math}
+      )
+  </insert>
+  
+  
+  <update id="updateStudent"
+          parameterType="com.gdu.mybatis_ex.dto.StudentDto">
+       UPDATE STUDENT_T
+          SET KOREAN = #{korean}
+            , ENGLISH = #{english}
+            , MATH = #{math}
+        WHERE STUDENTNO = #{studentNo}
+  </update>
+  
+  
+  <delete id="deleteStudent">
+      DELETE
+        FROM STUDENT_T
+       WHERE STUDENTNO = #{studentNo}
+  </delete>
+  
+  
+  <select id="selectStudentList"
+          parameterType="Map"
+          resultType="com.gdu.mybatis_ex.dto.StudentDto">
+      SELECT STUDENTNO, NAME, KOREAN, ENGLISH, MATH
+        FROM STUDENT_T
+       WHERE STUDENTNO = #{studentNo}
+  </select>
+  
+  
+  <select id="getStudentCount"
+          resultType="int">
+      SELECT COUNT(*)
+        FROM STUDENT_T
+  </select>
+  
+  
+  <select id="selectStudentByNo"
+          resultType="com.gdu.mybatis_ex.dto.StudentDto">
+      SELECT STUDENTNO, NAME, KOREAN, ENGLISH, MATH
+        FROM STUDENT_T
+       WHERE STUDENTNO = #{studentNo}
+  </select>
+  
+  
+  
+</mapper>

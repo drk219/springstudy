@@ -1,0 +1,17 @@
+package com.gdu.mybatis_ex.dao;
+
+import java.util.List;
+import java.util.Map;
+
+import com.gdu.mybatis_ex.dto.StudentDto;
+
+public interface StudentDao {
+
+  int insertStudent(StudentDto student);
+  int updateStudent(StudentDto student);
+  int deleteStudent(int studentNo);
+  List<StudentDto> selectStudentList(Map<String, Object> params);
+  int getStudentCount();
+  StudentDto selectStudentByNo(int studentNo);
+  
+}
