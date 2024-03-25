@@ -12,7 +12,7 @@
 <body>
   
   <div>
-    <a href="${contextPath}/student/list.do">학생관리</a>
+    <a href="${contextPath}/student/list.jsp">학생관리</a>
   </div>
 
 </body>

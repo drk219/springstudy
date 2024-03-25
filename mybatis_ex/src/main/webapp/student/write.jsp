@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +14,7 @@
     <h1>신규학생등록 화면</h1>
   </div>
   
-  <form action="${contextPath}/student/register.brd"
+  <form action="${contextPath}/student/register.jsp"
         method="post"
         id="frm-register">
     <div>

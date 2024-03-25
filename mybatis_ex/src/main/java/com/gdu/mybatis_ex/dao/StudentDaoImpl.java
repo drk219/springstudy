@@ -75,14 +75,18 @@ public class StudentDaoImpl implements StudentDao {
 
   @Override
   public int getStudentCount() {
-    
-    return 0;
+    SqlSession sqlSession = factory.openSession();
+    int total = sqlSession.selectOne("com.gdu.mybatis_ex.dao.student_t.getStudentCount");
+    sqlSession.close();
+    return total;
   }
 
   @Override
   public StudentDto selectStudentByNo(int studentNo) {
-    
-    return null;
+    SqlSession sqlSession = factory.openSession();
+    StudentDto student = sqlSession.selectOne("com.gdu.mybatis_ex.dao.selectStduentByNo", studentNo);
+    sqlSession.close();
+    return student;
   }
 
 }

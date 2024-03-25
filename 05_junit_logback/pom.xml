@@ -1,82 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.gdu</groupId>
-	<artifactId>prj05</artifactId>
-	<name>05_junit_logback</name>
-	<packaging>war</packaging>
-	<version>1.0.0-BUILD-SNAPSHOT</version>
- <properties>
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.gdu</groupId>
+  <artifactId>prj05</artifactId>
+  <name>05_junit_logback</name>
+  <packaging>war</packaging>
+  <version>1.0.0-BUILD-SNAPSHOT</version>
+
+  <properties>
     <java-version>11</java-version>
     <org.springframework-version>5.3.19</org.springframework-version>
     <org.aspectj-version>1.9.19</org.aspectj-version>
     <org.slf4j-version>2.0.12</org.slf4j-version>
   </properties>
   
-  <!-- 
-    Maven Project
-    1. pom.xml 에 등록된 디펜던시 태그에 필요한 라이브러리(jar)가 다운로드된다.
-    2. C:\Users\계정명\.m2 디렉토리에 라이브러리가 저장되어 있다.
-    3. 라이브러리에 문제가 발생하면 아래 숭서로 해결한다.
-      1) Spring Tools Suite 을 끈다.
-      2) C:\Users\계정명\.m2 디렉토리를 지운다.
-      3) Spring Tool Suite 를 켠다. (이 때 모두 다시 다운로드 된다.)
-      4) 프로젝트 우클릭 메뉴 - [Maven] - [Update Project] 를 선택한다.
-   -->
-  
   <dependencies>
   
-    <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
+    <!-- https://mvnrepository.com/artifact/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4.1 -->
+    <!-- 쿼리 출력을 위한 -->
     <dependency>
-        <groupId>ch.qos.logback</groupId>
-        <artifactId>logback-classic</artifactId>
-        <version>1.3.14</version>
-        <scope>test</scope>
+        <groupId>org.bgee.log4jdbc-log4j2</groupId>
+        <artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
+        <version>1.16</version>
     </dependency>
   
     <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+    <!-- 로그 (user 쪽) -->
     <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-api</artifactId>
-        <version>${org.slf4j-version}</version>
-    </dependency>
-  
-    <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
-    <dependency>
-        <groupId>org.mybatis</groupId>
-        <artifactId>mybatis</artifactId>
-        <version>3.5.13</version>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${org.slf4j-version}</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
-    <dependency>
-        <groupId>org.mybatis</groupId>
-        <artifactId>mybatis-spring</artifactId>
-        <version>2.1.1</version>
-    </dependency>
-  
     <!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
+    <!-- connection pooling을 제공하는 JDBC DataSource의 구현체  -->
     <dependency>
-        <groupId>com.zaxxer</groupId>
-        <artifactId>HikariCP</artifactId>
-        <version>4.0.3</version>
+      <groupId>com.zaxxer</groupId>
+      <artifactId>HikariCP</artifactId>
+      <version>4.0.3</version>
     </dependency>
-  
-    <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
+    
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+    <!-- 스프링과 jdbc 이어주는 -->
     <dependency>
-        <groupId>ch.qos.logback</groupId>
-        <artifactId>logback-classic</artifactId>
-        <version>1.4.14</version>
-        <scope>test</scope>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-jdbc</artifactId>
+        <version>${org.springframework-version}</version>
+    </dependency>
+    
+    <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+    <!-- 마이바티스 -->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+      <version>3.5.13</version>
+    </dependency>
+    
+    <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+    <!-- 마이바티스 스프링 이어주는 -->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis-spring</artifactId>
+      <version>2.1.1</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
+    <!-- 로그백 (백쪽) -->
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.3.14</version>
     </dependency>
   
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
     <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-test</artifactId>
-        <version>${org.springframework-version}</version>
-        <scope>test</scope>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>${org.springframework-version}</version>
+      <scope>test</scope>
     </dependency>
   
     <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
@@ -85,7 +88,7 @@
       <artifactId>jackson-databind</artifactId>
       <version>2.16.1</version>
     </dependency>
-    
+  
     <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -100,7 +103,7 @@
       <artifactId>ojdbc8</artifactId>
       <version>23.2.0.0</version>
     </dependency>
-    
+  
     <!-- Spring -->
     <dependency>
       <groupId>org.springframework</groupId>
@@ -111,7 +114,7 @@
         <exclusion>
           <groupId>commons-logging</groupId>
           <artifactId>commons-logging</artifactId>
-        </exclusion>
+         </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -125,7 +128,7 @@
       <groupId>org.aspectj</groupId>
       <artifactId>aspectjrt</artifactId>
       <version>${org.aspectj-version}</version>
-    </dependency> 
+    </dependency>
 
     <!-- @Inject -->
     <dependency>
@@ -133,8 +136,7 @@
       <artifactId>javax.inject</artifactId>
       <version>1</version>
     </dependency>
-        
-    <!-- Servlet -->
+    
     <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -150,7 +152,7 @@
       <version>2.3.3</version>
       <scope>provided</scope>
     </dependency>
-    
+
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>jstl</artifactId>
@@ -163,29 +165,29 @@
       <artifactId>junit</artifactId>
       <version>4.13.2</version>
       <scope>test</scope>
-    </dependency>    
-        
+    </dependency>
+    
   </dependencies>
-  
+    
   <build>
   
     <!-- deploy file (배포 파일) 이름 바꾸기 -->
     <finalName>${artifactId}</finalName>
-      
+  
     <plugins>
       <plugin>
         <artifactId>maven-eclipse-plugin</artifactId>
         <version>2.9</version>
-          <configuration>
-            <additionalProjectnatures>
-              <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
-            </additionalProjectnatures>
-            <additionalBuildcommands>
-              <buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
-            </additionalBuildcommands>
-            <downloadSources>true</downloadSources>
-            <downloadJavadocs>true</downloadJavadocs>
-          </configuration>
+        <configuration>
+          <additionalProjectnatures>
+            <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
+          </additionalProjectnatures>
+          <additionalBuildcommands>
+            <buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
+          </additionalBuildcommands>
+          <downloadSources>true</downloadSources>
+          <downloadJavadocs>true</downloadJavadocs>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -208,7 +210,6 @@
         </configuration>
       </plugin>
     </plugins>
-      
-    </build>
+  </build>
+    
 </project>
-  

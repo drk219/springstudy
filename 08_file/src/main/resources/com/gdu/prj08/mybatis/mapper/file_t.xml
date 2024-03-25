@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.gdu.prj08.mybatis.mapper.file_t"> 
+  <!-- .xml 안 써도 되기 때문에 .으로 경로 구분 가능 -->
+  
+  <insert id="insertHistory"
+          parameterType="HistoryDto">
+    
+    <!-- HistoryDto 안에 있는 historyNo 안에 있는 시퀀스 번호만 가져가겠다 -->
+    <!-- 시퀀스와 HistoryDto 객체에서 가져온 값으로 HISTORY_T 테이블에 새 레코드를 삽입 -->
+    <!-- insert의 #{historyNo}는 select에서 바로 뽑아져 나온 번호이고 #{writer}, #{ip}는 service를 통해서 가져온 -->
+    <!-- 
+         <selectKey>: 이 부분은 삽입 전에 HISTORY_SEQ 시퀀스에서 다음 값을 검색하는 데 사용 
+         keyProperty 속성은 검색된 값이 매개변수 객체(아마도 HistoryDto)에 저장될 위치를 지정 
+         resultType은 결과의 유형을 지정하며
+         order="BEFORE"는 삽입 전에 select 문이 실행되어야 함 
+      -->
+    <selectKey keyProperty="historyNo" resultType="int" order="BEFORE"> 
+      SELECT HISTORY_SEQ.NEXTVAL
+        FROM DUAL
+    </selectKey> 
+    
+    INSERT INTO HISTORY_T(
+        HISTORY_NO
+      , WRITER
+      , IP
+    ) VALUES (
+        #{historyNo}
+      , #{writer}
+      , #{ip}
+    )
+  </insert>
+
+
+  <insert id="insertFile"
+          parameterType="FileDto">
+    INSERT INTO FILE_T(
+        FILE_NO
+      , UPLOAD_PATH
+      , ORIGINAL_FILENAME
+      , FILESYSTEM_NAME
+      , HISTORY_NO
+    ) VALUES (
+        FILE_SEQ.NEXTVAL
+      , #{uploadPath}
+      , #{originalFilename}
+      , #{filesystemName}
+      , #{historyNo}
+    )
+  </insert>
+
+
+</mapper>
