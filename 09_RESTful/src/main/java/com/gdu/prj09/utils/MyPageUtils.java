@@ -1,7 +1,9 @@
 package com.gdu.prj09.utils;
 
+import lombok.Data;
 
-public class MyPageUtils {
+@Data
+public class MyPageUtils {   // 페이징 처리 담당
 
   private int total;
   private int display;
@@ -46,13 +48,28 @@ public class MyPageUtils {
     StringBuilder builder = new StringBuilder();
     
     // <
+    if(beginPage == 1) {
+      builder.append("<a>&lt;</a>");
+    } else {
+      builder.append("<a href=\"javascript:fnPaging(" + (beginPage - 1) +")\">&lt;</a>");      
+    }
     
     // 1 2 3 4 5 6 7 8 9 10
+    for(int p = beginPage; p <= endPage; p++) {
+      if (p == page) {
+        builder.append("<a>" + p + "</a>");
+      } else {
+        builder.append("<a href=\"javascript:fnPaging(" + p + ")\">" + p + "</a>");        
+      }
+    }
     
     // >
+    if(endPage == totalPage) {
+      builder.append("<a>&gt;</a>");
+    } else {
+      builder.append("<a href=\"javascript:fnPaging(" + (endPage + 1) + ")\">&gt;</a>");      
+    }
     
     return builder.toString();
-    
   }
-  
 }
