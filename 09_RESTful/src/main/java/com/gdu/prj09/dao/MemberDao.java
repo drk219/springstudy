@@ -10,9 +10,10 @@ public interface MemberDao {
 
   int insertMember(MemberDto member);                            // 멤버 등록
   int insertAddress(AddressDto address);                         // 주소 등록
-  int updateMember(MemberDto member);                            // 멤버 내용 수정 
+  int updateMember(Map<String, Object> map);                     // 멤버 내용 수정 (이름 성별 정도만 수정 가능)
+  int updateAddress(Map<String, Object> map);                    // 회원 주소 수정 
   int deleteMember(int memberNo);                                // 멤버 번호로 멤버 삭제
-  int deleteMembers(List<String> memberNoList);                  // 멤버 여러명 지우기
+  int deleteMembers(List<String> memberNoList);                  // 멤버 여러명 삭제
   int getTotalMemberCount();                                     // 등록된 멤버 총합
   List<AddressDto> getMemberList(Map<String, Object> map);       // 주소 포함해서 멤버 목록가져오기
   MemberDto getMemberByNo(int memberNo);                         // 멤버번호로 멤버 상세 조회하기 

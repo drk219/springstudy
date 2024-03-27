@@ -14,7 +14,7 @@
   <div>
   
     <h1>회원관리</h1>
-    
+    <input type="hidden" id="member-no">
     <div>
       <label for="email">이메일</label>
       <input type="text" id="email">
@@ -102,6 +102,7 @@
     
       <div id="total"></div>
       <div>
+        <button type="button" id="btn-select-remove">선택삭제</button>
         <select id="display">
           <option>20</option>
           <option>50</option>
@@ -125,9 +126,7 @@
             <td colspan="5" id="paging"></td>
           </tr>
         </tfoot>
-      </table>
-      <button type="button" id="btn-select-remove">선택삭제</button>
-    
+      </table>    
     </div>
     
   </div>
@@ -136,12 +135,11 @@
   <script>
   
 // jQuery 객체 선언
-
   
 // 함수 표현식 (함수 만들기)
 
-
 // 함수 호출 및 이벤트
+
 
   </script>
 

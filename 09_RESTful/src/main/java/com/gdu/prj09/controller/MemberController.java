@@ -7,9 +7,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.gdu.prj09.service.MemberService;
@@ -33,7 +35,7 @@ import lombok.RequiredArgsConstructor;
  *    2) 상세       |   /members/1                  |     GET
  *    3) 삽입       |   /members                    |     POST
  *    4) 수정       |   /members                    |     PUT
- *    5) 삭제(단일) |   /members/1                  |     DELETE
+ *    5) 삭제(단일) |   /member/1                   |     DELETE
  *    6) 삭제(복수) |   /members/1,2,3              |     DELETE
  */    
 
@@ -49,12 +51,14 @@ public class MemberController {
     // /admin/member.do =====> /WEB-INF/views/admin/member.jsp
   }
   
+  
   @PostMapping(value="/members", produces="application/json")
   // member 등록하는 메소드 (스트링 타입도 int타입도 있기 때문에 Map으로 가져오기)
   public ResponseEntity<Map<String, Object>> registerMember(@RequestBody Map<String, Object> map
                                                           , HttpServletResponse response) {
     return memberService.registerMember(map, response);
   }
+  
   
   @GetMapping(value="/members/page/{page}/display/{display}", produces="application/json")
   // 1 페이지마다 20 member를 표시하는 메소드 
@@ -66,6 +70,7 @@ public class MemberController {
     return memberService.getMembers(page, display);
   }
   
+  
   @GetMapping(value = "/members/{memberNo}", produces = "application/json")
   // memberNo로 member 상세보기
   public ResponseEntity<Map<String, Object>> getMemberByNo(@PathVariable(value = "memberNo", required = false) Optional<String> opt){
@@ -75,5 +80,31 @@ public class MemberController {
     
     return memberService.getMemberByNo(memberNo);
   }
+  
+  
+  @PutMapping(value = "/members", produces = "application/json")
+  // 회원 수정
+  public ResponseEntity<Map<String, Object>> modifyMember(@RequestBody Map<String, Object> map) {
+    
+    return memberService.modifyMember(map);  // 전달자 역할만 수행한다.
+  }
+  
+  
+  @DeleteMapping(value = "/member/{memberNo}", produces = "application/json")
+  // 회원 한명 삭제 (회원을 삭제 할 때 주소정보도 함께 삭제되기 때문에 (쿼리에서 이미 ON DELETE CASCADE 처리 해놓음) 
+  public ResponseEntity<Map<String, Object>> removeMember(@PathVariable(value = "memberNo", required = false) Optional<String> opt) {
+    
+    int memberNo = Integer.parseInt(opt.orElse("0"));
+    
+    return memberService.removeMember(memberNo);
+  }
+  
+  
+  @DeleteMapping(value = "/members/{memberNoList}", produces = "application/json")
+  public ResponseEntity<Map<String, Object>> removeMembers(@PathVariable(value = "memberNoList", required = false) Optional<String> opt){
+    
+    return memberService.removeMembers(opt.orElse("0"));
+  }
 
+  
 }
