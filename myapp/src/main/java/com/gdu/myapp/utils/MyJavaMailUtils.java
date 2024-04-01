@@ -1,18 +1,25 @@
 package com.gdu.myapp.utils;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+
+@PropertySource(value = "classpath:email.properties")
 public class MyJavaMailUtils {
+  
+  // 프로퍼티를 읽어서 뿌려주는
+  @Autowired
+  private Environment env;
   
   public void sendMail(String to, String subject, String content) {
     
@@ -28,7 +35,8 @@ public class MyJavaMailUtils {
       
       @Override
       protected PasswordAuthentication getPasswordAuthentication() {
-        return new PasswordAuthentication("gmail", "password");
+        return new PasswordAuthentication(env.getProperty("spring.mail.username")
+                                        , env.getProperty("spring.mail.password"));
       }
       
     });
@@ -37,7 +45,7 @@ public class MyJavaMailUtils {
       
       // 메일 만들기 (보내는 사람 + 받는 사람 + 제목 + 내용)
       MimeMessage mimeMessage = new MimeMessage(session);
-      mimeMessage.setFrom(new InternetAddress("gmail", "password"));
+      mimeMessage.setFrom(new InternetAddress(env.getProperty("spring.mail.username"), "password"));
       mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
       mimeMessage.setSubject(subject);
       mimeMessage.setContent(content, "text/html; charset-UTF-8");
